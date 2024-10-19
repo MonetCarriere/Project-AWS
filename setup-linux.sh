@@ -25,6 +25,17 @@ then
 else
   echo 'installing multipass'
   sudo snap install multipass --classic
+  echo 'please wait for ten seconds'
+  sleep 10
+fi
+# Check if specific vm exists, if not, create it.
+if (multipass info aws-vm)
+then 
+  echo 'the Vm already exists'
+else
+  echo 'creating aws-vm'
+  mulitpass launch --name aws-vm
+  multipass list
 fi
 
 # Check if all applications are installed
