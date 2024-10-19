@@ -1,3 +1,5 @@
 # Project-AWS
-Create a Vm, install Terraform and then create a AWS instance. 
+1: Create a Vm. ❌
+2: Install Terraform. ❌
+3: Create a AWS instance. ❌ 
 
