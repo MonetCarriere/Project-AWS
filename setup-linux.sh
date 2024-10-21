@@ -29,12 +29,12 @@ else
   sleep 10
 fi
 # Check if specific vm exists, if not, create it.
-if (multipass info aws-vm)
+if (multipass info awesome-vm)
 then 
   echo 'the Vm already exists'
 else
   echo 'creating aws-vm'
-  mulitpass launch --name aws-vm
+  mulitpass launch --name awesome-vm
   multipass list
 fi
 
