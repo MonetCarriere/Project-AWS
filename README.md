@@ -12,7 +12,7 @@ To start the project run:
 
 # 2
 To transfer file from local to vm, cd to Project-AWS and run the following command:
-`multipass transfer installTerraInVm.sh awesome-vm`
+`multipass transfer installTerraInVm.sh awesome-vm:/home/ubuntu`
 
 
 # 3
