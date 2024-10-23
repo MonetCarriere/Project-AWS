@@ -1,8 +1,9 @@
+
 #!/bin/bash
 
-# Check if gnupg is installed
+# Check if gnupg are in apt cache-if not update cache and install dependencies
 if (apt-cache show gnupg); then
-    echo 'gnupg is already installed'
+    echo 'gnupg is already in the apt-cache'
 else
     sudo apt-get update
     echo 'Installing gnupg and software-properties-common...'
@@ -31,8 +32,8 @@ fi
 
 # Check if apt needs updating after potential repository addition
 if (apt-cache show terraform)
-  then 
-  echo 'terrform package is already up to date'
+then 
+  echo "terraform is in the apt cache and available to be installed"
 else
   apt update
 fi
