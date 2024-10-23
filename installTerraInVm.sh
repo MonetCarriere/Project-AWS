@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Check if gnupg is installed
-if gpg --version; then
+if (apt-cache show gnupg); then
     echo 'gnupg is already installed'
 else
     sudo apt-get update
@@ -38,9 +38,11 @@ https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
 fi
 
 # Check if apt needs updating after potential repository addition
-if test -f /etc/apt/sources.list.d/hashicorp.list && find /etc/apt/sources.list.d/hashicorp.list -mmin -5; then
-    echo 'Running apt update due to recent repository changes...'
-    sudo apt update
+if (apt-cache show terraform)
+  then 
+  echo 'terrform package is already up to date'
+else
+  apt update
 fi
 
 # Check for Terraform installation
