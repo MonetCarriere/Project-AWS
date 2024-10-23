@@ -9,14 +9,6 @@ else
     sudo apt-get install -y gnupg software-properties-common
 fi
 
-# Check for apt-cache status
-if apt-cache search gnupg && apt-cache search software-properties-common; then
-    echo 'Package cache is up to date'
-else
-    echo 'Updating package cache...'
-    sudo apt-get update
-fi
-
 # Check for HashiCorp GPG key
 if gpg --no-default-keyring --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg --fingerprint | grep HashiCorp; then
     echo 'HashiCorp GPG key is already present and verified.'
