@@ -7,8 +7,11 @@
 # PROJECT COMMANDS:
 
 # 1
-To start the project run:
+To start the project on a Linux run:
 `bash create-vm.sh`
+To start the project on a Mac run:
+`zsh create-vm.sh`
+
 
 # 2
 To transfer file from local to vm, cd to Project-AWS and run the following command:
