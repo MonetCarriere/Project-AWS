@@ -7,10 +7,8 @@
 # PROJECT COMMANDS:
 
 # 1
-To start the project on a Linux run:
-`bash create-vm.sh`
-To start the project on a Mac run:
-`zsh create-vm.sh`
+To start the project run:
+`$SHELL create-vm.sh`
 
 
 # 2
