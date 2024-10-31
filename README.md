@@ -8,7 +8,8 @@
 
 # 1
 To start the project run:
-`bash create-vm.sh`
+`$SHELL create-vm.sh`
+
 
 # 2
 To transfer file from local to vm, cd to Project-AWS and run the following command:
