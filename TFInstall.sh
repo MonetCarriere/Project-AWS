@@ -15,3 +15,20 @@ else
   sudo apt-get install -y gnupg
 fi
 
+
+# Check if the HashiCorp GPG key and repository are added
+if apt-cache policy terraform | grep -q 'hashicorp'
+then
+  echo "HashiCorp repository is already present. Skipping addition of GPG key and repository."
+else
+  echo "Adding the HashiCorp GPG key and repository."
+
+  # Add the HashiCorp GPG key using apt-key
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA16FCBCA621E701
+
+  # Add the official HashiCorp Linux repository to the sources list
+  sudo sh -c 'echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/hashicorp.list'
+
+  # Update the package list again to recognize the HashiCorp repository
+  sudo apt-get update
+fi
