@@ -21,6 +21,6 @@ if dpkg -s software-properties-common > /dev/null 2>&1; then
   echo 'software-properties-common is already installed'
 else
   echo 'Installing software-properties-common...'
-  sudo apt-get update && sudo apt-get install -y software-properties-common
+  sudo apt-get install -y software-properties-common
 fi
 
