@@ -2,7 +2,6 @@
 if (which terraform)
 then
   echo "Terraform is already installed."
-  exit 0
 else
   echo "Terraform is not installed. Proceeding with installation."
 fi
