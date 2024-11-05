@@ -26,6 +26,6 @@ Once you're inside the VM, run the following script to install Terraform:
 `bash TFInstall.sh`
 
 
-#🗑️ WHEN YOU'RE FINISHED USING THE VM, DELETE IT  WITH THE FOLLOWING COMMAND:
+# 🗑️ WHEN YOU'RE FINISHED USING THE VM, DELETE IT  WITH THE FOLLOWING COMMAND:
 `multipass stop awesome-vm && multipass delete awesome-vm --purge` 
 
