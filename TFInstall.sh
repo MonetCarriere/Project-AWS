@@ -5,6 +5,7 @@ then
 else
   echo "Terraform is not installed. Proceeding with installation."
 fi
+
 # Check if gnupg is installed
 if (which gpg)
 then
