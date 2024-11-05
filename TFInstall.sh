@@ -23,12 +23,16 @@ then
 else
   echo "Adding the HashiCorp GPG key and repository."
 
-  # Add the HashiCorp GPG key using apt-key
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA16FCBCA621E701
+ # Create a directory for keyrings if it doesn't exist
+  sudo mkdir -p /etc/apt/keyrings
 
-  # Add the official HashiCorp Linux repository to the sources list
-  sudo sh -c 'echo "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main" > /etc/apt/sources.list.d/hashicorp.list'
+  # Download and add the HashiCorp GPG key to /etc/apt/keyrings
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
 
-  # Update the package list again to recognize the HashiCorp repository
+  # Add the official HashiCorp Linux repository to the sources list, referencing the GPG key
+  echo "deb [signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+
+  # Update the package list to recognize the HashiCorp repository
   sudo apt-get update
+
 fi
