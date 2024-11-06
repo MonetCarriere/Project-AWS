@@ -43,3 +43,8 @@ else
   sudo apt-get update
 
 fi
+
+  # Install Terraform
+  echo 'Installing Terraform.'
+  sudo apt-get install -y terraform
+  echo 'Installation Complete! You now have Terraform 👏👏👏'
