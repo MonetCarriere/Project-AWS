@@ -1,11 +1,3 @@
-# Check if Terraform is installed
-if (which terraform)
-then
-  echo "Terraform is already installed."
-else
-  echo "Terraform is not installed. Proceeding with installation."
-fi
-
 # Check if gnupg is installed
 if (which gpg)
 then
@@ -45,6 +37,10 @@ else
 fi
 
   # Install Terraform
-  echo 'Installing Terraform.'
+if command -v terraform
+  echo "Terraform is already installed"
+else
+  echo "Installing Terraform..."
   sudo apt-get install -y terraform
-  echo 'Installation Complete! You now have Terraform 👏👏👏'
+  echo "Terraform is now installed on your computer 👏👏👏"
+fi
