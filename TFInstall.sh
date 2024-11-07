@@ -21,9 +21,16 @@ then
   echo "HashiCorp repository is already present. Skipping addition of GPG key and repository."
 else
   echo "Adding the HashiCorp GPG key and repository."
+fi
 
- # Create a directory for keyrings if it doesn't exist
+# Check if /etc/apt/keyrings directory exists
+if [ -d "/etc/apt/keyrings" ]
+then
+  echo "/etc/apt/keyrings directory already exists."
+else
+  echo "Creating /etc/apt/keyrings directory."
   sudo mkdir -p /etc/apt/keyrings
+fi
 
   # Download and add the HashiCorp GPG key to /etc/apt/keyrings
   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
