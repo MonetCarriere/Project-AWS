@@ -32,17 +32,6 @@ else
   sudo mkdir -p /etc/apt/keyrings
 fi
 
-  # Download and add the HashiCorp GPG key to /etc/apt/keyrings
-  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
-
-  # Add the official HashiCorp Linux repository to the sources list, referencing the GPG key
-  echo "deb [signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
-
-  # Update the package list to recognize the HashiCorp repository
-  sudo apt-get update
-
-fi
-
 # check if the keyring file is present, if it is do nothing, if it isnt grab it from hashicorp and dearmor it
 
 if [ -f /etc/apt/keyrings/hashicorp.gpg ]
