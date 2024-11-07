@@ -32,6 +32,15 @@ else
   sudo mkdir /etc/apt
 fi
 
+# Check if /etc/apt/keyrings directory exists
+if [ -d "/etc/apt/keyrings" ]
+then
+  echo "/etc/apt/keyrings directory already exists."
+else
+  echo "Creating /etc/apt/keyrings directory."
+  sudo mkdir /etc/apt/keyrings
+fi
+
   # Download and add the HashiCorp GPG key to /etc/apt/keyrings
   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
 
