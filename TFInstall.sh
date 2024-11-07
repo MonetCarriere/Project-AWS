@@ -43,6 +43,18 @@ fi
 
 fi
 
+# check if the keyring file is present, if it is do nothing, if it isnt grab it from hashicorp and dearmor it
+
+if [ -f /etc/apt/keyrings/hashicorp.gpg ]
+then
+  echo "Hashicorp keyring file already exists."
+else
+  echo "Hashicorp keyring file not found. Downloading and dearmoring it..."
+  
+  # Download the Hashicorp GPG key
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
+fi  
+
   # Install Terraform
 if command -v terraform
   echo "Terraform is already installed"
