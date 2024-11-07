@@ -46,6 +46,7 @@ fi
 
   # Install Terraform
 if command -v terraform
+then
   echo "Terraform is already installed"
 else
   echo "Installing Terraform..."
