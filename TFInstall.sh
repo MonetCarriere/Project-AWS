@@ -23,22 +23,13 @@ else
   echo "Adding the HashiCorp GPG key and repository."
 fi
 
-# Check if /etc/apt directory exists
-if [ -d "/etc/apt" ]
-then
-  echo "/etc/apt directory already exists."
-else
-  echo "Creating /etc/apt directory."
-  sudo mkdir /etc/apt
-fi
-
 # Check if /etc/apt/keyrings directory exists
 if [ -d "/etc/apt/keyrings" ]
 then
   echo "/etc/apt/keyrings directory already exists."
 else
   echo "Creating /etc/apt/keyrings directory."
-  sudo mkdir /etc/apt/keyrings
+  sudo mkdir -p /etc/apt/keyrings
 fi
 
   # Download and add the HashiCorp GPG key to /etc/apt/keyrings
