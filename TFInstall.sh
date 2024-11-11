@@ -1,53 +1,60 @@
 # Check if gnupg is installed
-if (which gpg)
+if (command -v gpg > /dev/null)
 then
   echo "gnupg is already installed."
 else
-  echo "Installing gnupg"
+  echo "Installing gnupg..."
   sudo apt-get install -y gnupg
 fi
 
 # Check if software-properties-common is installed
-if dpkg -s software-properties-common > /dev/null 2>&1; then
-  echo 'software-properties-common is already installed'
+if (dpkg -s software-properties-common > /dev/null 2>&1)
+then
+  echo "software-properties-common is already installed."
 else
-  echo 'Installing software-properties-common...'
+  echo "Installing software-properties-common..."
   sudo apt-get install -y software-properties-common
 fi
 
 # Check if the HashiCorp GPG key and repository are added
-if apt-cache policy terraform | grep -q 'hashicorp'
+if (apt-cache policy terraform | grep -q 'hashicorp')
 then
   echo "HashiCorp repository is already present. Skipping addition of GPG key and repository."
 else
   echo "Adding the HashiCorp GPG key and repository."
 fi
 
-# Check if /etc/apt/keyrings directory exists
-if [ -d "/etc/apt/keyrings" ]
+# Ensure /etc/apt/keyrings directory exists
+if [ ! -d "/etc/apt/keyrings" ]
 then
-  echo "/etc/apt/keyrings directory already exists."
-else
   echo "Creating /etc/apt/keyrings directory."
   sudo mkdir -p /etc/apt/keyrings
 fi
 
-# check if the keyring file is present, if it is do nothing, if it isnt grab it from hashicorp and dearmor it
-
+# Check if the HashiCorp keyring file exists
 if [ -f /etc/apt/keyrings/hashicorp.gpg ]
 then
   echo "Hashicorp keyring file already exists."
 else
-  echo "Hashicorp keyring file not found. Downloading and dearmoring it..."
-  
-  # Download the Hashicorp GPG key
-  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
-fi  
+  echo "Downloading and dearmoring the HashiCorp key..."
+  wget -O- https://apt.releases.hashicorp.com/gpg | \
+  gpg --dearmor | \
+  sudo tee /etc/apt/keyrings/hashicorp.gpg > /dev/null
+fi
 
-  # Install Terraform
-if command -v terraform
+# Add the HashiCorp repository
+if [ ! -f /etc/apt/sources.list.d/hashicorp.list ]
 then
-  echo "Terraform is already installed"
+  echo "Adding HashiCorp repository to sources list."
+  echo "deb [signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+  sudo apt-get update
+fi
+
+# Install Terraform if not already installed
+if (command -v terraform > /dev/null)
+then
+  echo "Terraform is already installed."
 else
   echo "Installing Terraform..."
   sudo apt-get install -y terraform
