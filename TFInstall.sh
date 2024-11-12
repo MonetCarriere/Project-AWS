@@ -44,12 +44,19 @@ else
   curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
 fi  
 
-  # Install Terraform
-if command -v terraform
+# Install Terraform
+if command -v terraform > /dev/null 2>&1
 then
-  echo "Terraform is already installed"
+echo "Terraform is already installed."
 else
-  echo "Installing Terraform..."
-  sudo apt-get install -y terraform
-  echo "Terraform is now installed on your computer 👏👏👏"
+echo "Installing Terraform..."
+sudo apt-get install -y terraform
+
+# Verify installation
+if command -v terraform > /dev/null 2>&1
+then
+echo "Terraform is now installed on your computer 👏👏👏"
+else
+echo "Terraform installation failed. Please check for errors."
+fi
 fi
