@@ -15,41 +15,15 @@ else
   sudo apt-get install -y software-properties-common
 fi
 
-# Check if the HashiCorp GPG key and repository are added
-if apt-cache policy terraform | grep -q 'hashicorp'
-then
-  echo "HashiCorp repository is already present. Skipping addition of GPG key and repository."
+# Check if the HashiCorp repository is already present
+if grep -q 'hashicorp.list' /etc/apt/sources.list.d/hashicorp.list; then
+  echo 'HashiCorp repository is already present.'
 else
-  echo "Adding the HashiCorp GPG key and repository."
+  echo 'Adding HashiCorp repository...'
+  echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] 
+\
+https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/hashicorp.list
 fi
 
-# Check if /etc/apt/keyrings directory exists
-if [ -d "/etc/apt/keyrings" ]
-then
-  echo "/etc/apt/keyrings directory already exists."
-else
-  echo "Creating /etc/apt/keyrings directory."
-  sudo mkdir -p /etc/apt/keyrings
-fi
 
-# check if the keyring file is present, if it is do nothing, if it isnt grab it from hashicorp and dearmor it
-
-if [ -f /etc/apt/keyrings/hashicorp.gpg ]
-then
-  echo "Hashicorp keyring file already exists."
-else
-  echo "Hashicorp keyring file not found. Downloading and dearmoring it..."
-  
-  # Download the Hashicorp GPG key
-  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/hashicorp.gpg
-fi  
-
-  # Install Terraform
-if command -v terraform
-then
-  echo "Terraform is already installed"
-else
-  echo "Installing Terraform..."
-  sudo apt-get install -y terraform
-  echo "Terraform is now installed on your computer 👏👏👏"
-fi
