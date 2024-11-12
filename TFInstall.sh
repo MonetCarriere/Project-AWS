@@ -25,10 +25,14 @@ else
 fi
 
 # Ensure /etc/apt/keyrings directory exists
-if [ ! -d "/etc/apt/keyrings" ]
+if [ -f /etc/apt/sources.list.d/hashicorp.list ]
 then
-  echo "Creating /etc/apt/keyrings directory."
-  sudo mkdir -p /etc/apt/keyrings
+  echo "HashiCorp repository is already in the sources list."
+else
+  echo "Adding HashiCorp repository to sources list."
+  echo "deb [signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+  sudo apt-get update
 fi
 
 # Check if the HashiCorp keyring file exists
