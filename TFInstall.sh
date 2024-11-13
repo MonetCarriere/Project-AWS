@@ -25,10 +25,14 @@ else
 fi
 
 # Ensure /etc/apt/keyrings directory exists
-if [ ! -d "/etc/apt/keyrings" ]
+if [ -f /etc/apt/sources.list.d/hashicorp.list ]
 then
-  echo "Creating /etc/apt/keyrings directory."
-  sudo mkdir -p /etc/apt/keyrings
+  echo "HashiCorp repository is already in the sources list."
+else
+  echo "Adding HashiCorp repository to sources list."
+  echo "deb [signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
+  sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+  sudo apt-get update
 fi
 
 # Check if the HashiCorp keyring file exists
@@ -42,17 +46,19 @@ else
   sudo tee /etc/apt/keyrings/hashicorp.gpg > /dev/null
 fi
 
-# Add the HashiCorp repository
-if [ ! -f /etc/apt/sources.list.d/hashicorp.list ]
+# Add the HashiCorp repository to sources list
+if [ -f /etc/apt/sources.list.d/hashicorp.list ]
 then
+  echo "HashiCorp repository is already in the sources list."
+else
   echo "Adding HashiCorp repository to sources list."
   echo "deb [signed-by=/etc/apt/keyrings/hashicorp.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
   sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
   sudo apt-get update
 fi
 
-# Install Terraform if not already installed
-if (command -v terraform > /dev/null)
+# Check if Terraform is installed with an additional method using 'which'
+if (which terraform > /dev/null)
 then
   echo "Terraform is already installed."
 else
