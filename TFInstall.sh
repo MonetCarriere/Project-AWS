@@ -45,18 +45,10 @@ else
 fi  
 
 # Install Terraform
-if command -v terraform > /dev/null 2>&1
+if command -v terraform
 then
 echo "Terraform is already installed."
 else
 echo "Installing Terraform..."
 sudo apt-get install -y terraform
-
-# Verify installation
-if command -v terraform > /dev/null 2>&1
-then
-echo "Terraform is now installed on your computer 👏👏👏"
-else
-echo "Terraform installation failed. Please check for errors."
-fi
 fi
