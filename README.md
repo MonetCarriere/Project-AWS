@@ -25,6 +25,5 @@ To install Terraform in the VM shell into your multipass VM and run the TFInstal
 
 ```shell
 multipass shell awesome-vm
-bash TFInstall.sh
+bash terraformInstall.sh
 ```
-
