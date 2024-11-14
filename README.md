@@ -27,3 +27,8 @@ To install Terraform in the VM shell into your multipass VM and run the TFInstal
 multipass shell awesome-vm
 bash terraformInstall.sh
 ```
+
+#4
+To stop and delete the VM run this command:
+
+```multipass delete awesome-vm --purge```
