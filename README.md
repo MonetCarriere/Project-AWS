@@ -28,7 +28,9 @@ multipass shell awesome-vm
 bash terraformInstall.sh
 ```
 
-#4
+# 4
 To stop and delete the VM run this command:
 
-```multipass delete awesome-vm --purge```
+```shell
+multipass delete awesome-vm --purge
+```
