@@ -17,7 +17,7 @@ bash create-vm.sh
 To transfer file from local to vm, cd to Project-AWS and run the following command:
 
 ```shell
-multipass transfer TFInstall.sh awesome-vm:/home/ubuntu
+multipass transfer terraformInstall.sh awesome-vm:/home/ubuntu
 ```
 
 # 3
