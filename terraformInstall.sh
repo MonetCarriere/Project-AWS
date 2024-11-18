@@ -4,30 +4,34 @@
 echo "Installing prerequisites..."
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 
-#!/bin/bash
+## CONDITIONAL 2
 
-# Check if gpg is installed
-if ( which gpg > /dev/null 2>&1 )
+# Check if gnupg exists in the apt cache
+if ( apt-cache show gnupg > /dev/null 2>&1 )
 then
-    echo "gpg is installed."
+    echo "gnupg already exists in the apt cache."
 else
-    echo "Error: gpg is not installed. Please install it before running this script."
-    exit 1
+    echo "Updating apt cache."
+    sudo apt update
 fi
 
-# Check if the keyring file exists using stat
-if (stat /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null 2>&1)
+# Check if gnupg is installed
+if ( dpkg -s gnupg > /dev/null 2>&1 )
 then
-    echo "HashiCorp GPG key already exists."
+    echo "gnupg is installed."
+else
+    echo "gnupg is not installed. Installing gnupg."
+    sudo apt-get install -y gnupg > /dev/null 2>&1
+fi
+
+# Check if the keyring file exists
+if ( stat /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null 2>&1 )
+then
+    echo "HashiCorp GPG key already exists at /usr/share/keyrings/hashicorp-archive-keyring.gpg."
 else
     echo "HashiCorp GPG key not found. Adding HashiCorp GPG key."
-
-    # Add the HashiCorp GPG key
-    wget -O- https://apt.releases.hashicorp.com/gpg |
-    gpg --dearmor |
-    sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+    wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 fi
-
 
 ## CONDITIONAL 3
 echo "Verifying GPG key..."
