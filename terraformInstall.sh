@@ -12,9 +12,14 @@ wget -O- https://apt.releases.hashicorp.com/gpg | \
 
 ## CONDITIONAL 3
 echo "Verifying GPG key..."
-gpg --no-default-keyring \
+if gpg --no-default-keyring \
     --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
     --fingerprint
+then 
+  echo 'The keys fingerprint is verified'
+else 
+  echo 'the fingerprint is not verified'
+fi
 
 ## CONDITIONAL 4
 echo "Adding HashiCorp repository..."
