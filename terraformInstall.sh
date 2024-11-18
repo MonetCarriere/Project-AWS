@@ -18,7 +18,10 @@ if gpg --no-default-keyring \
 then 
   echo 'The keys fingerprint is verified'
 else 
-  echo 'the fingerprint is not verified'
+  echo 'the fingerprint is not verified, lets try again to get it right my dude!'
+  gpg --no-default-keyring \
+    --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+    --fingerprint
 fi
 
 ## CONDITIONAL 4
