@@ -7,28 +7,33 @@
 # PROJECT COMMANDS:
 
 # 1
-To start the project run:
+To create the VM:
 
 ```shell
 bash create-vm.sh
 ```
 
 # 2
-To transfer file from local to vm, cd to Project-AWS and run the following command:
+To transfer the Terraform file from local to VM:
 
 ```shell
 multipass transfer terraformInstall.sh awesome-vm:/home/ubuntu
 ```
 
-# 3
-To install Terraform in the VM shell into your multipass VM and run the TFInstall.sh script: 
-
+#3
+To install Terraform from your local machine:
 ```shell
-multipass shell awesome-vm
-bash terraformInstall.sh
+multipass exec awesome-vm -- bash terraformInstall.sh
 ```
 
 # 4
+To shell into your multipass VM: 
+
+```shell
+multipass shell awesome-vm
+```
+
+# 5
 To stop and delete the VM run this command:
 
 ```shell
