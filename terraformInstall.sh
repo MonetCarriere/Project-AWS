@@ -41,15 +41,6 @@ gpg --no-default-keyring \
 
 ## CONDITIONAL 4
 
-# Check if the HashiCorp repository is in the apt cache
-if ( apt-cache policy | grep "https://apt.releases.hashicorp.com" > /dev/null 2>&1 )
-then
-    echo "HashiCorp repository already exists in the apt cache."
-else
-    echo "Updating apt cache."
-    sudo apt update
-fi
-
 # Check if the HashiCorp repository file exists
 if (stat /etc/apt/sources.list.d/hashicorp.list > /dev/null 2>&1)
 then
@@ -59,6 +50,16 @@ else
     echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
     https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
     sudo tee /etc/apt/sources.list.d/hashicorp.list > /dev/null
+fi
+
+# Check cache for Hashicorp repo
+
+if (which "https://apt.releases.hashicorp.com" > /dev/null 2>&1)
+then
+    echo "HashiCorp repository already exists in the apt cache."
+else
+    echo "Updating apt cache."
+    sudo apt update
 fi
 
 ## CONDITIONAL 5
