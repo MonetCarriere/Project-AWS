@@ -62,10 +62,6 @@ else
     sudo apt update
 fi
 
-## CONDITIONAL 5
-echo "Updating package lists..."
-sudo apt update
-
 ## CONDITIONAL 6
 echo "Installing Terraform..."
 sudo apt-get install terraform
