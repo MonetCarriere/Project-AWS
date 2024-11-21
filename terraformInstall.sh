@@ -54,7 +54,7 @@ fi
 
 # Check cache for Hashicorp repo
 
-if (which "https://apt.releases.hashicorp.com" > /dev/null 2>&1)
+if (apt show "https://apt.releases.hashicorp.com" > /dev/null 2>&1)
 then
     echo "HashiCorp repository already exists in the apt cache."
 else
