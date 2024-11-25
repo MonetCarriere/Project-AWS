@@ -4,8 +4,6 @@
 echo "Installing prerequisites..."
 sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
 
-## CONDITIONAL 2
-
 # Check if gnupg exists in the apt cache
 if ( apt-cache show gnupg > /dev/null 2>&1 )
 then
@@ -15,7 +13,6 @@ else
     sudo apt update
 fi
 
-
 # Check if gnupg is installed
 if ( dpkg -s gnupg > /dev/null 2>&1 )
 then
@@ -24,6 +21,8 @@ else
     echo "gnupg is not installed. Installing gnupg."
     sudo apt-get install -y gnupg > /dev/null 2>&1
 fi
+
+## CONDITIONAL 2
 
 # Check if the keyring file exists
 if ( stat /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null 2>&1 )
