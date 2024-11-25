@@ -15,6 +15,7 @@ else
     sudo apt update
 fi
 
+
 # Check if gnupg is installed
 if ( dpkg -s gnupg > /dev/null 2>&1 )
 then
@@ -63,8 +64,14 @@ else
 fi
 
 ## CONDITIONAL 5
-echo "Installing Terraform..."
-sudo apt-get install terraform
+# Check if Terraform is installed
+if ( command -v terraform > /dev/null 2>&1 )
+then
+    echo "Terraform is already installed."
+else
+    echo "Terraform is not installed. Installing Terraform."
+    sudo apt-get install -y terraform
+fi
 
 ## CONDITIONAL 6
 echo "Installation complete. Run 'terraform --version' to verify."
