@@ -3,28 +3,19 @@
 ## CONDITIONAL 1
 # Update package lists
 echo "Installing Prerequisites..."
-if sudo apt update; then
-    echo "Package lists updated successfully ✅"
+
+# Check if gnupg is in the apt cache
+if apt-cache show gnupg; then
+    echo "gnupg already exists in the apt cache 👍"
 else
-    echo "Failed to update package lists ❌"
+    echo "gnupg not found in apt cache, updating package lists 🔄"
 fi
 
-#Checks if gnupg is in the cache
-if (apt-cache show gnupg)
-then
-  echo "gnupg already exists in the apt cache👍"
+# Check if software-properties-common is in the apt cache
+if apt-cache show software-properties-common; then
+    echo "software-properties-common already exists in the apt cache 👍"
 else
-  echo "updating apt cache 🔄 "
-  sudo apt update
-fi
-
-#Checks if software-properties-common is in the cache
-if (apt-cache show software-properties-common)
-then
-  echo "software-properties-common already exists in the apt cache👍"
-else
-  echo "updating apt cache 🔄 "
-  sudo apt update
+    echo "software-properties-common not found in apt cache, updating package lists 🔄"
 fi
 
 # Install gnupg and software-properties-common
@@ -33,6 +24,7 @@ if sudo apt-get install -y gnupg software-properties-common; then
     echo "gnupg and software-properties-common installed successfully 😊👍"
 else
     echo "Failed to install gnupg and software-properties-common 🙁👎"
+    sudo apt-get install -y gnupg software-properties-common
 fi
 
 ## CONDITIONAL 2
