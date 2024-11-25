@@ -9,6 +9,7 @@ if apt-cache show gnupg; then
     echo "gnupg already exists in the apt cache 👍"
 else
     echo "gnupg not found in apt cache, updating package lists 🔄"
+    sudo apt update
 fi
 
 # Check if software-properties-common is in the apt cache
@@ -16,6 +17,7 @@ if apt-cache show software-properties-common; then
     echo "software-properties-common already exists in the apt cache 👍"
 else
     echo "software-properties-common not found in apt cache, updating package lists 🔄"
+    sudo apt update
 fi
 
 # Install gnupg and software-properties-common
