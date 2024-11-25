@@ -63,11 +63,11 @@ else
     sudo apt update
 fi
 
-## CONDITIONAL 5
+## CONDITIONAL 6
 echo "Updating package lists..."
 sudo apt update
 
-## CONDITIONAL 6
+## CONDITIONAL 7
 
 # Check if Terraform is installed
 if ( command -v terraform > /dev/null 2>&1 )
@@ -78,5 +78,5 @@ else
     sudo apt-get install -y terraform
 fi
 
-## CONDITIONAL 7
+## CONDITIONAL 8
 echo "Installation complete. Run 'terraform --version' to verify."
