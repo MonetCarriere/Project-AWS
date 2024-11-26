@@ -11,7 +11,7 @@ wget -O- https://apt.releases.hashicorp.com/gpg | \
     sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 
 ## CONDITIONAL 3 it actually is two if thens. 
-echo "Verifying GPG key..."
+
 if gpg --no-default-keyring \
     --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
     --fingerprint
