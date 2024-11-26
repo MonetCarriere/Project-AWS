@@ -40,23 +40,6 @@ else
   echo "software-properties-common is installed ✨👍"
 fi
 
-# Check if gnupg exists in the apt cache
-if ( apt-cache show gnupg > /dev/null 2>&1 )
-then
-    echo "gnupg already exists in the apt cache."
-else
-    echo "Updating apt cache."
-    sudo apt update
-fi
-
-# Check if gnupg is installed
-if ( dpkg -s gnupg > /dev/null 2>&1 )
-then
-    echo "gnupg is installed."
-else
-    echo "gnupg is not installed. Installing gnupg."
-    sudo apt-get install -y gnupg > /dev/null 2>&1
-fi
 
 ## CONDITIONAL 2
 
