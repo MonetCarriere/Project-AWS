@@ -33,11 +33,30 @@ else
     wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
 fi
 
-## CONDITIONAL 3
-echo "Verifying GPG key..."
-gpg --no-default-keyring \
+## CONDITIONAL 3 it actually is two if thens. 
+
+if gpg --no-default-keyring \
     --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
     --fingerprint
+then 
+  echo 'The keys fingerprint is verified'
+else 
+  echo 'the fingerprint is not verified, lets try again to get it right my dude!'
+  wget -O- https://apt.releases.hashicorp.com/gpg | \
+  gpg --dearmor | \
+  sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg > /dev/null
+fi
+# if verification fails, retrieve keys from hashicorp archive again.  
+echo "Re-verifying the GPG key..."
+if gpg --no-default-keyring \
+       --keyring /usr/share/keyrings/hashicorp-archive-keyring.gpg \
+       --fingerprint
+then
+  echo "The GPG key was successfully re-added and verified."
+else
+  echo "Failed to verify the GPG key after re-adding it. Please check manually."
+ 
+fi
 
 ## CONDITIONAL 4
 
