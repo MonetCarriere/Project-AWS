@@ -20,13 +20,24 @@ else
     sudo apt update
 fi
 
-# Install gnupg and software-properties-common
-echo "Installing gnupg and software-properties-common..."
-if sudo apt-get install -y gnupg software-properties-common; then
-    echo "gnupg and software-properties-common installed successfully 😊👍"
+# Install gnupg 
+if (which gnupg);
+then
+    echo "gnupg is already installed 🎉"
 else
-    echo "Failed to install gnupg and software-properties-common 🙁👎"
-    sudo apt-get install -y gnupg software-properties-common
+    echo "Installing gnupg...⬇️"
+    sudo apt-get install -y gnupg
+    echo "gnupg is installed ✨👍"
+fi
+
+# Install software-properties-common
+if (which software-properties-common); 
+then
+  echo "software-properties-common is installed 🎉"
+else
+  echo "Installing software-properties-common...⬇️"
+  sudo apt-get install -y software-properties-common
+  echo "software-properties-common is installed ✨👍"
 fi
 
 ## CONDITIONAL 2
